@@ -1,0 +1,41 @@
+[config]
+
+[templates.micro]
+input_path = '~/.local/share/matugen/templates/micro.micro'
+output_path = '~/.config/micro/colorschemes/matugen.micro'
+
+[templates.yazi]
+input_path = '~/.local/share/matugen/templates/yazi.toml'
+output_path = '~/.config/yazi/theme.toml'
+
+[templates.rmpc]
+input_path = '~/.local/share/matugen/templates/rmpc.ron'
+output_path = '~/.config/rmpc/themes/matugen.ron'
+
+[templates.steam]
+input_path = '~/.local/share/matugen/templates/steam.css'
+output_path = '~/.config/AdwSteamGtk/custom.css'
+post_hook =  'adwaita-steam-gtk -i'
+
+[templates.zathura]
+input_path = '~/.local/share/matugen/templates/zathurarc'
+output_path = '~/.config/zathura/zathurarc'
+
+[template.zellij]
+input_path = '~/.local/share/matugen/templates/zellij.kdl'
+output_path = '~/.config/zellij/themes/matugen.kdl'
+post_hook = 'touch ~/.config/zellij/config.kdl' 
+
+[templates.starship]
+input_path = '~/.local/share/matugen/templates/starship.toml'
+output_path = '~/.config/starship.toml'
+
+[templates.cava]
+input_path = '~/.local/share/matugen/templates/cava.ini'
+output_path = '~/.config/cava/themes/matugen.ini'
+post_hook = 'pkill -USR1 cava'
+
+[templates.btop]
+input_path = '~/.local/share/matugen/templates/btop.theme'
+output_path = '~/.config/btop/themes/matugen.theme'
+post_hook = 'pkill -USR2 btop || true'

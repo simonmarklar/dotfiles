@@ -1,0 +1,26 @@
+###############################
+#
+# mgr
+#
+#
+
+[[mgr.prepend_keymap]]
+on   = "<Enter>"
+desc = "Enter the child directory, or open the file"
+run  = "plugin smart-enter"
+
+[[mgr.prepend_keymap]]
+on	= ["r", "a"]
+desc	= "Add or update a dotfile to chezmoi"
+run		= "shell --block -- chezmoi add %s"
+
+################################
+#
+# Input
+#
+#
+
+[[input.prepend_keymap]]
+on   = "<Esc>"
+desc = "Cancel input"
+run  = "close"
