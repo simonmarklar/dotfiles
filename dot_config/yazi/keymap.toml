@@ -5,14 +5,20 @@
 #
 
 [[mgr.prepend_keymap]]
-on   = "<Enter>"
-desc = "Enter the child directory, or open the file"
-run  = "plugin smart-enter"
+on		= "<Enter>"
+desc	= "Enter the child directory, or open the file"
+run  	= "plugin smart-enter"
 
 [[mgr.prepend_keymap]]
-on	= ["r", "a"]
-desc	= "Add or update a dotfile to chezmoi"
+on		= ["r", "a"]
+desc	= "rice - Add or update a dotfile to chezmoi"
 run		= "shell --block -- chezmoi add %s"
+
+[[mgr.prepend_keymap]]
+on		= ["r", "f"]
+desc	= "rice - forget a dotfile in chezmoi"
+run		= "shell --block -- chezmoi forget %s"
+
 
 ################################
 #
@@ -21,6 +27,6 @@ run		= "shell --block -- chezmoi add %s"
 #
 
 [[input.prepend_keymap]]
-on   = "<Esc>"
-desc = "Cancel input"
-run  = "close"
+on		= "<Esc>"
+desc	= "Cancel input"
+run		= "close"
