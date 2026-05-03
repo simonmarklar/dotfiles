@@ -6,3 +6,4 @@ dotfiles for my CachyOS/Niri/DMS setup
 - yazi
 - mutagen
 - mpd
+- rmpc
