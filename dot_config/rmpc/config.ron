@@ -4,9 +4,10 @@
 (
     address: "127.0.0.1:6600",
     password: None,
-    theme: "default",
+    theme: "matugen-updated",
     cache_dir: None,
-    on_song_change: None,
+    on_song_change: ["~/.local/share/rmpc/scripts/increment-playcount.sh"],
+    on_exit: None,
     volume_step: 5,
     max_fps: 30,
     scrolloff: 0,
@@ -39,19 +40,12 @@
         ),
         smoothing: (
             noise_reduction: 77, // default 77
-            monstercat: false, // default false
+            monstercat: true, // default false
             waves: false, // default false
         ),
         // this is a list of floating point numbers thats directly passed to cava
         // they are passed in order that they are defined
-        eq: []
-    ),
-    album_art: (
-        method: Auto,
-        max_size_px: (width: 1200, height: 1200),
-        disabled_protocols: ["http://", "https://"],
-        vertical_align: Center,
-        horizontal_align: Center,
+        //eq: [1, 2, 3, 4, 5]
     ),
     keybinds: (
         global: {
@@ -166,135 +160,136 @@
     ),
     tabs: [
         (
-            name: "Queue",
+            name: "Now Playing",
             pane: Split(
-                direction: Horizontal,
+                direction: Vertical,
                 panes: [
-                    (
-                        size: "35%",
+                	(
+                        size: "100%", 
                         pane: Split(
-                            direction: Vertical,
+                            direction: Horizontal,
+                            borders: "BOTTOM",
                             panes: [
                                 (
-                                    size: "100%",
-                                    borders: "LEFT | RIGHT | TOP",
-                                    border_symbols: Rounded,
+                                    size: "40%",
+                                    horizontal_align: Centre,
+                                    vertical_align: Center,
                                     pane: Pane(AlbumArt)
                                 ),
-                                (
-                                	size: "100%", 
-                                	pane: Pane(Cava),
-                                	borders: "LEFT | RIGHT | BOTTOM",
+                                (size: "1", pane: Pane(Empty())),
+                                (size: "60%", pane: Split(
+                                    direction: Vertical,
+                                    panes: [
+                                        (
+                                            size: "1",
+                                            scroll_speed: 1,
+                                            pane: Component("artist_and_track"),
+                                        ),
+                                        (
+                                            size: "100%",
+                                            pane: Split(
+                                                direction: Horizontal,
+                                                panes: [
+                                                    (
+                                                        size: "50%",
+                                                        align: Left,
+                                                        pane: Component("state")
+                                                    ),
+                                                    (
+                                                        size: "50%",
+                                                        align: Right,
+                                                        pane: Component("elapsed_time")
+                                                    ),
+                                                ]
+                                            )
+                                        ),
+                                    ])
                                 ),
-                            ],
-                        ),
-                    ), 
-                    (
-                        size: "65%",
-                        pane: Split(
-                            direction: Vertical,
-                            panes: [
-                                (
-                                    size: "3",
-                                    borders: "ALL",
-                                    border_symbols: Inherited(parent: Rounded, bottom_left: "├", bottom_right: "┤",),
-                                    pane: Split(
-                                        direction: Horizontal,
-                                        panes: [
-                                            (
-                                                size: "1",
-                                                pane: Pane(Empty())
-                                            ),
-                                            (
-                                                size: "100%",
-                                                pane: Pane(QueueHeader())
-                                            ),
-                                        ]
-                                    )
-                                ),
-                                (
-                                    size: "100%",
-                                    borders: "LEFT | RIGHT | BOTTOM",
-                                    border_symbols: Rounded,
-                                    pane: Split(
-                                        direction: Horizontal,
-                                        panes: [
-                                            (
-                                                size: "1",
-                                                pane: Pane(Empty())
-                                            ),
-                                            (
-                                                size: "100%",
-                                                pane: Pane(Queue)
-                                            ),
-                                        ]
-                                    )
-                                ),
-                            ],
+                                (size: "3", pane: Pane(Empty()))
+                            ]
                         )
                     ),
+                    (size: "100%", pane: Pane(Cava)),
                 ],
             ),
         ),
         (
-            name: "Directories",
-            borders: "ALL",
-            border_symbols: Rounded,
+            name: "Queue",
             pane: Split(
-                size: "100%",
                 direction: Vertical,
-                panes: [(pane: Pane(Directories), size: "100%", borders: "ALL", border_symbols: Rounded)],
-            )
-        ),
-        (
-            name: "Artists",
-            borders: "ALL",
-            border_symbols: Rounded,
-            pane: Split(
-                size: "100%",
-                direction: Vertical,
-                panes: [(pane: Pane(Artists), size: "100%", borders: "ALL", border_symbols: Rounded)],
-            )
-        ),
-        (
-            name: "Album Artists",
-            borders: "ALL",
-            border_symbols: Rounded,
-            pane: Split(
-                size: "100%",
-                direction: Vertical,
-                panes: [(pane: Pane(AlbumArtists), size: "100%", borders: "ALL", border_symbols: Rounded)],
-            )
-        ),
-        (
-            name: "Albums",
-            borders: "ALL",
-            border_symbols: Rounded,
-            pane: Split(
-                size: "100%",
-                direction: Vertical,
-                panes: [(pane: Pane(Albums), size: "100%", borders: "ALL", border_symbols: Rounded)],
+                panes: [
+                    (size: "1", pane: Pane(QueueHeader())),
+                    (size: "100%", pane: Pane(Queue)),
+                ]
             )
         ),
         (
             name: "Playlists",
-            borders: "ALL",
-            border_symbols: Rounded,
-            pane: Split(
-                size: "100%",
-                direction: Vertical,
-                panes: [(pane: Pane(Playlists), size: "100%", borders: "ALL", border_symbols: Rounded)],
-            )
+            pane: Pane(Playlists)
+        ),
+        (
+            name: "Files",
+            pane: Pane(Directories),
+            background_color: "blue",
         ),
         (
             name: "Search",
-            borders: "ALL",
+            borders: "NONE",
             border_symbols: Rounded,
-            pane: Split(
-                size: "100%",
-                direction: Vertical,
-                panes: [(pane: Pane(Search), size: "100%", borders: "ALL", border_symbols: Rounded)],
-            )
+            pane: Pane(Search),
         ),
-    ],
+        (
+            name: "Browse (WIP)",
+            background_color: "green",
+            pane: Pane(Browser(
+                root_tag: "AlbumArtist",
+                levels: [
+                    (
+                        // Only tags defined in group_by are available on the first level. Fallback tags
+                        // are not supported here, each entry must have exactly one tag.
+                        // Multiple group_by entries produce one directory per unique combination of those
+                        // tags. sort_by and format must only reference tags defined in group_by.
+                        group_by: [[AlbumArtist], [Album], [Other("date")]],
+                        sort_by: [[AlbumArtist]],
+                        format: [
+                            (kind: Property(AlbumArtist), default: (kind: Text("<no artist>"))),
+                            (kind: Text(" - ")),
+                            (kind: Property(Album)),
+                            (kind: Text(" - ")),
+                            (kind: Property(Other("date")), default: (kind: Text("<no date>"))),
+                        ],
+                    ),
+                    (
+                        group_by: [[Added], [Other(Genre)]],
+                        sort_by: [[AddedDesc]],
+                        format: [
+                            (kind: Text("Added on: ")),
+                            (kind: Property(Added)),
+                            (kind: Other(Genre)),
+                        ]
+                    ),
+                    (
+                        group_by: [[Other("label")]],
+                        sort_by: [[Other("label")]],
+                        format: [
+                            (kind: Property(Other("label")), default: (kind: Property(Other("label")), default: (kind: Text("no artist")))),
+                        ]
+                    ),
+
+                    (
+                        group_by: [[Other("genre")]],
+                        sort_by: [[Other("genre")]],
+                        format: [
+                            (kind: Property(Other("genre")), default: (kind: Property(Other("genre")), default: (kind: Text("no artist")))),
+                        ]
+                    ),
+
+                    
+                    
+                    
+                ]
+            )
+        )),
+       
+	],
 )

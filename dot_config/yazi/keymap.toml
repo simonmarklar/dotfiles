@@ -12,12 +12,12 @@ run  	= "plugin smart-enter"
 [[mgr.prepend_keymap]]
 on		= ["r", "a"]
 desc	= "rice - Add or update a dotfile to chezmoi"
-run		= "shell --block -- chezmoi add %s"
+run		= "shell -- chezmoi add %s"
 
 [[mgr.prepend_keymap]]
 on		= ["r", "f"]
 desc	= "rice - forget a dotfile in chezmoi"
-run		= "shell --block -- chezmoi forget %s"
+run		= "shell -- chezmoi forget %s"
 
 
 ################################

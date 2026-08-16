@@ -1,0 +1,79 @@
+[display]
+show_time = true
+greeting = "who the fuck are you?"
+align_greeting = "center"
+issue = false
+
+[layout]
+width = 60
+window_padding = 2
+container_padding = 1
+prompt_padding = 1
+
+[layout.widgets]
+time_position = "top"      # "top", "bottom", "default", "hidden"
+status_position = "bottom" # "top", "bottom", "default", "hidden"
+
+[remember]
+username = true
+session = false
+user_session = true
+
+[user_menu]
+enabled = false
+min_uid = 1000
+max_uid = 60000
+
+[secret]
+mode = "characters"  # "hidden" or "characters"
+characters = ""
+
+# `[display] asterisks = true|false` remains supported for compatibility but is
+# deprecated. Migrate it to `secret.mode`; `secret.mode` wins if both are set.
+
+[keybindings]
+command = 2     # F2
+sessions = 3    # F3
+background = 4  # F4
+power = 12      # F12
+
+[background]
+kind = "matrix"        # or "none" to disable
+fps = 10
+
+[background.doom]
+height = 6           # 1-9, taller flames at higher values
+spread = 2           # 0-4, horizontal jitter
+top_color = "#9F2707"
+middle_color = "#C78F17"
+bottom_color = "#FFFFFF"
+
+[background.matrix]
+head_color = "{{colors.on_surface.default.hex}}"
+bright_color = "{{colors.primary.default.hex}}"
+dim_color = "{{colors.secondary_container.default.hex}}"
+min_length = 3
+max_length = 18
+min_speed = 0.30     # rows per frame
+max_speed = 0.80
+mutate_chance = 0.4 # per-cell glyph shimmer probability
+
+[session]
+sessions_dirs = ["/usr/share/wayland-sessions", "/usr/share/xsessions"]
+xsessions_dirs = []
+environments = []
+
+[power]
+use_setsid = false
+
+[theme]
+border = "{{colors.tertiary_container.default.hex}}"
+text = "{{colors.on_surface.default.hex}}"
+time = "{{colors.secondary.default.hex}}"
+container = "{{colors.surface.default.hex}}"
+title = "{{colors.primary.default.hex}}"
+greet = "{{colors.primary.default.hex}}"
+prompt = "{{colors.secondary.default.hex}}"
+input = "{{colors.on_primary.default.hex}}"
+action = "{{colors.secondary.default.hex}}"
+button = "{{colors.surface.default.hex}}"

@@ -1,5 +1,10 @@
 [config]
 
+[templates.tuigreet]
+input_path = '~/.local/share/matugen/templates/tuigreet.toml'
+output_path = '~/.config/tuigreet/config.toml'
+post_hook = "sudo -n /usr/local/bin/copy-themes-to-etc.sh"
+
 [templates.micro]
 input_path = '~/.local/share/matugen/templates/micro.micro'
 output_path = '~/.config/micro/colorschemes/matugen.micro'
